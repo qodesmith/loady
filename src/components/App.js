@@ -20,7 +20,7 @@ class App extends Component {
       fetch('/load')
         .then(res => res.json())
         .then(({ load }) => this.props.loadReceived(load))
-    }, 1000)
+    }, 1500)
   }
 
   // React error handling!

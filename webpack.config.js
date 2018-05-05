@@ -178,6 +178,7 @@ module.exports = (env, argv) => ({
 
               // https://goo.gl/N9gaqc - List of Babel plugins.
               plugins: [
+                'recharts',
                 '@babel/plugin-proposal-object-rest-spread', // https://goo.gl/LCHWnP
                 '@babel/plugin-proposal-class-properties' // https://goo.gl/TE6TyG
               ]
