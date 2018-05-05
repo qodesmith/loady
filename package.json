@@ -7,11 +7,12 @@
   "email": "",
   "main": "server.js",
   "dependencies": {
+    "body-parser": "^1",
+    "compression": "^1",
     "express": "^4",
     "helmet": "^3",
-    "compression": "^1",
-    "body-parser": "^1",
-    "nodemon": "latest"
+    "nodemon": "latest",
+    "systeminformation": "^3.40.0"
   },
   "devDependencies": {
     "react": "^16",
