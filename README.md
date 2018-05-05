@@ -10,11 +10,11 @@ Because it's fun. Because I can. Because JavaScript, dammit.
 
 ## Sanity Check
 
-- [ ] What metric _is_ cpu load?
-- [ ] Find what Node packages can be used to monitor cpu load.
+- [X] What metric _is_ cpu load?
+- [X] Find what Node packages can be used to monitor cpu load.
 - [ ] ~~FE should look like Jarvis!~~
 - [ ] FE should _not_ look like Jarvis. User friendly plz.
-- [ ] BE should have a single route that pings the things & sends it to the FE.
+- [X] BE should have a single route that pings the things & sends it to the FE.
 - [ ] Use localStorage to persist data.
 
 
