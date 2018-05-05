@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { loadReceived } from 'utils/actions'
+import Graph from 'components/Graph'
 
 
 class App extends Component {
@@ -44,13 +45,17 @@ class App extends Component {
       )
     }
 
-    return <div>No page yet</div>
+    return (
+      <div className='pa3 vw-100 vh-100 overflow-h df flex-col'>
+        <Graph className='ba-1px flex-grow-1 mb3' />
+        <div className='ba-1px vh-20'>Bottom</div>
+      </div>
+    )
   }
 }
 
-const mapStateToProps = ({ location }) => ({ location })
 const mapDispatchToProps = dispatch => ({
-  loadReceived: num => console.log(num) || dispatch(loadReceived(num))
+  loadReceived: num => dispatch(loadReceived(num))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default connect(null, mapDispatchToProps)(App)
