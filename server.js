@@ -30,6 +30,8 @@ app.use(
   ------------------------------
 */
 
+app.get('/load', require('./api/load'))
+
 
 /*
   Catch-all endpoint which delivers `index.html` and let's
