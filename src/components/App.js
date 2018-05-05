@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
-import { exampleActionCreator } from '../utils/actions'
-import Example from './Example'
+import { loadReceived } from 'utils/actions'
 
 
 class App extends Component {
@@ -11,11 +10,21 @@ class App extends Component {
   }
 
   componentWillMount() {
-    document.body.className = 'bg-black-80 f4 white-80'
+    document.body.className = 'bg-black-85 f4 turquoise fw1'
+  }
+
+  componentDidMount() {
+    // Every 10 seconds, fetch the CPU load.
+    this.interval = setInterval(() => {
+      fetch('/load')
+        .then(res => res.json())
+        .then(({ load }) => this.props.loadReceived(load))
+    }, 1000)
   }
 
   // React error handling!
   componentDidCatch(error) {
+    clearInterval(this.interval)
     this.setState({ error })
     console.log(error)
   }
@@ -35,10 +44,13 @@ class App extends Component {
       )
     }
 
-    return <Example />
+    return <div>No page yet</div>
   }
 }
 
 const mapStateToProps = ({ location }) => ({ location })
+const mapDispatchToProps = dispatch => ({
+  loadReceived: num => console.log(num) || dispatch(loadReceived(num))
+})
 
-export default connect(mapStateToProps)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(App)

@@ -1,6 +1,6 @@
-# Uptime!
+# Loady!
 
-The goal of this project is to create an app that monitors your local computers uptime. How can we do that you ask? Well, don't even _think_ about having access to system stuff like that on the front end. I mean, bro, do you even security? We'll need a sexy back end that pings the things and let's the front end in on all its secrets. Node to the rescue!
+The goal of this project is to create an app that monitors your servers cpu load. How can we do that you ask? Well, don't even _think_ about having access to system stuff like that on the front end. I mean, bro, do you even security? We'll need a sexy back end that pings the things and let's the front end in on all its secrets. Node to the rescue!
 
 
 ## Why?
@@ -10,8 +10,8 @@ Because it's fun. Because I can. Because JavaScript, dammit.
 
 ## Sanity Check
 
-- [ ] What metric _is_ system uptime?
-- [ ] Find what Node packages can be used to monitor system uptime.
+- [ ] What metric _is_ cpu load?
+- [ ] Find what Node packages can be used to monitor cpu load.
 - [ ] ~~FE should look like Jarvis!~~
 - [ ] FE should _not_ look like Jarvis. User friendly plz.
 - [ ] BE should have a single route that pings the things & sends it to the FE.
