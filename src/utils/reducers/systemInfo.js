@@ -1,5 +1,6 @@
 const now = Date.now()
 const initialState = {
+  interval: 3000,
   loads: [7,6,5,4,3,2,1,0].map(num => ({
     time: new Date(now - (1000 * num)).toLocaleTimeString(),
     value: 0

@@ -12,6 +12,7 @@ import {
   ResponsiveContainer
 } from 'recharts'
 
+// http://recharts.org/en-US/api
 // { value: 0.24, time: '6:49:28 PM' }
 
 const Graph = ({ className, loads, date }) => {

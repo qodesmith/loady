@@ -15,12 +15,14 @@ class App extends Component {
   }
 
   componentDidMount() {
-    // Every 10 seconds, fetch the CPU load.
+    const { interval, loadReceived } = this.props
+
+    // Fetch the CPU load periodically.
     this.interval = setInterval(() => {
       fetch('/load')
         .then(res => res.json())
-        .then(({ load }) => this.props.loadReceived(load))
-    }, 1250)
+        .then(({ load }) => loadReceived(load))
+    }, interval)
   }
 
   // React error handling!
@@ -54,8 +56,9 @@ class App extends Component {
   }
 }
 
+const mapStateToProps = ({ systemInfo }) => ({ interval: systemInfo.interval })
 const mapDispatchToProps = dispatch => ({
   loadReceived: num => dispatch(loadReceived(num))
 })
 
-export default connect(null, mapDispatchToProps)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(App)
