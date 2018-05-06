@@ -2,10 +2,10 @@
   How many points should the graph show?
   Since we want to ping the server every 10 seconds,
   and our warning potentially go via a 2 minute evaluation,
-  that leaves us 12 minimum points to calculate if we've
-  hit a threshold.
+  we need at least 12 points. BUT... we want 10 minutes
+  worth of data, so that's 60 loads.
 */
-const GRAPH_POINTS = 12
+const GRAPH_POINTS = 60
 
 /*
   How often should we ping the server?
