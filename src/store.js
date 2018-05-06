@@ -1,9 +1,10 @@
 import { combineReducers, createStore, applyMiddleware, compose } from 'redux'
-import systemInfo from './utils/reducers/systemInfo'
+import systemInfo from 'reducers/systemInfo'
+import alertWatch from 'middleware/alertWatch'
 
 
 // Add all your custom middleware to this array.
-const middlewareList = []
+const middlewareList = [alertWatch]
 
 // Add all your reducers to this object.
 const rootReducer = combineReducers({ systemInfo })
