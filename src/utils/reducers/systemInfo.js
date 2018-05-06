@@ -19,7 +19,7 @@ const INTERVAL = 250
   For 'production', it's 1, but when developing,
   it's nice to set this lower to test alerting.
 */
-const THRESHOLD = .33
+const THRESHOLD = .31
 
 /*
   Since the graph reads from right to left - right being the most recent -
@@ -42,7 +42,7 @@ const starterLoads = length => {
 var timeDate = (time = Date.now()) => new Date(time).toLocaleTimeString()
 
 const initialState = {
-  darkTheme: true,
+  theme: 'light',
   inAlertStatus: false,
   interval: INTERVAL,
   threshold: THRESHOLD,
@@ -67,7 +67,7 @@ const systemInfo = (state = initialState, action = {}) => {
         ...state,
         inAlertStatus: true,
         messages: [{
-          msg: `High load generated an alert. Load = ${action.payload}, triggered at ${timeDate()}`,
+          msg: `${timeDate()}: high load (${action.payload}) detected`,
           type: 'alert'
         }].concat(state.messages)
       }
@@ -76,7 +76,7 @@ const systemInfo = (state = initialState, action = {}) => {
         ...state,
         inAlertStatus: false,
         messages: [{
-          msg: `System recovered from a high load at ${timeDate()}`,
+          msg: `${timeDate()}: system recovered from a high load`,
           type: 'recover'
         }].concat(state.messages)
       }

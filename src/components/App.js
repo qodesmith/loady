@@ -12,10 +12,12 @@ class App extends Component {
   }
 
   componentWillMount() {
-    const darkTheme = 'fw1 bg-black-85 turquoise'
-    const lightTheme = 'fw1 black-85'
+    const themes = {
+      dark: 'fw1 bg-black-85 turquoise',
+      light: 'fw1 black-85'
+    }
 
-    document.body.className = darkTheme
+    document.body.className = themes[this.props.theme]
   }
 
   componentDidMount() {
@@ -52,7 +54,7 @@ class App extends Component {
     }
 
     const { inAlertStatus } = this.props
-    const baseClass = 'ba-1px h-25 pa3'
+    const baseClass = 'ba-1px h-25 pa3 mono overflow-y-s'
     const cls = `${baseClass}${inAlertStatus ? ' red' : ''}`
 
     return (
@@ -66,7 +68,8 @@ class App extends Component {
 
 const mapStateToProps = ({ systemInfo }) => ({
   interval: systemInfo.interval,
-  inAlertStatus: systemInfo.inAlertStatus
+  inAlertStatus: systemInfo.inAlertStatus,
+  theme: systemInfo.theme
 })
 const mapDispatchToProps = dispatch => ({
   loadReceived: num => dispatch(loadReceived(num))
