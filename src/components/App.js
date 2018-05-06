@@ -11,7 +11,10 @@ class App extends Component {
   }
 
   componentWillMount() {
-    document.body.className = 'bg-black-85 f4 turquoise fw1'
+    const darkTheme = 'fw1 bg-black-85 turquoise'
+    const lightTheme = 'fw1 black-85'
+
+    document.body.className = darkTheme
   }
 
   componentDidMount() {
