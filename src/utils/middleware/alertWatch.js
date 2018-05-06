@@ -7,13 +7,16 @@
       it's recovered message time.
 */
 
+import { alert, recover } from 'actions'
+
+
 const alertWatch = store => next => action => {
   next(action) // Actions get passed through by default.
 
   // We'll trigger calculating alerts each time the server is pinged.
   if (action.type !== 'LOAD_RECEIVED') return
 
-  const { loads } = store.getState().systemInfo
+  const { loads, inAlertStatus, threshold } = store.getState().systemInfo
 
   /*
     Get the average of the past 2 minutes worth of loads.
@@ -21,7 +24,12 @@ const alertWatch = store => next => action => {
   */
   const avg = loads.slice(-12).reduce((acc, { value }) => (acc + value), 0) / 12
 
-  console.log('AVG:', avg)
+  // Alert or recover.
+  if (inAlertStatus) {
+    avg < threshold && store.dispatch(recover())
+  } else if (avg > threshold) {
+    store.dispatch(alert())
+  }
 }
 
 export default alertWatch

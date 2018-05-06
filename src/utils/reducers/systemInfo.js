@@ -34,6 +34,9 @@ const starterLoads = length => {
 
 const initialState = {
   interval: INTERVAL,
+  inAlertStatus: false,
+  threshold: .25,
+  messages: [],
   loads: starterLoads(GRAPH_POINTS)
 }
 
@@ -48,6 +51,18 @@ const systemInfo = (state = initialState, action = {}) => {
           value: action.payload,
           time: new Date().toLocaleTimeString()
         })
+      }
+    case 'ALERT':
+      return {
+        ...state,
+        inAlertStatus: true,
+        messages: state.messages.concat({ date: Date.now(), type: 'alert' })
+      }
+    case 'RECOVER':
+      return {
+        ...state,
+        inAlertStatus: false,
+        messages: state.messages.concat({ date: Date.now(), type: 'recover' })
       }
     default:
       return state
