@@ -39,6 +39,7 @@
     "purgecss-whitelister": "latest",
     "react": "^16",
     "react-dom": "^16",
+    "react-highcharts": "^16.0.2",
     "react-redux": "^5",
     "recharts": "^1.0.0-beta.10",
     "redux": "^3",

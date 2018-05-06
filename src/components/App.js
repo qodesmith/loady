@@ -20,7 +20,7 @@ class App extends Component {
       fetch('/load')
         .then(res => res.json())
         .then(({ load }) => this.props.loadReceived(load))
-    }, 1500)
+    }, 1250)
   }
 
   // React error handling!
@@ -47,8 +47,8 @@ class App extends Component {
 
     return (
       <div className='pa3 vw-100 vh-100 overflow-h df flex-col'>
-        <Graph className='ba-1px flex-grow-1 mb3' />
-        <div className='ba-1px vh-20'>Bottom</div>
+        <Graph className='flex-grow-1 mb3 h-75' />
+        <div className='ba-1px h-25'>Bottom</div>
       </div>
     )
   }
