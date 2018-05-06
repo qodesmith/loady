@@ -12,20 +12,29 @@ import {
   ResponsiveContainer
 } from 'recharts'
 
-// http://recharts.org/en-US/api
+// http://recharts.org
 // { value: 0.24, time: '6:49:28 PM' }
 
 const Graph = ({ className, loads, date }) => {
   return (
     <div className={className}>
-      <ResponsiveContainer width='100%' height='100%'>
+
+      {/* Defaults to 100% width & height. */}
+      <ResponsiveContainer>
         <LineChart data={loads}>
           <XAxis dataKey='time' />
           <YAxis domain={[0, 0.5]} width={25} />
-          {/*<CartesianGrid strokeDasharray='3 3'/>*/}
-          <Tooltip/>
+          <CartesianGrid strokeDasharray='3 3' stroke='#363636' />
+          <Tooltip />
           {/*<Legend />*/}
-          <Line type='monotone' dataKey='value' stroke='#8884d8' activeDot={{r: 8}}/>
+          <Line
+            type='monotone'
+            dataKey='value'
+            stroke='#8884d8'
+            activeDot={{r: 8}}
+            isAnimationActive
+            animationDuration={250}
+          />
         </LineChart>
       </ResponsiveContainer>
     </div>

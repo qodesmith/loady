@@ -1,25 +1,54 @@
-const now = Date.now()
-const initialState = {
-  interval: 3000,
-  loads: [7,6,5,4,3,2,1,0].map(num => ({
-    time: new Date(now - (1000 * num)).toLocaleTimeString(),
-    value: 0
+/*
+  How many points should the graph show?
+  Since we want to ping the server every 10 seconds,
+  and our warning potentially go via a 2 minute evaluation,
+  that leaves us 12 minimum points to calculate if we've
+  hit a threshold.
+*/
+const GRAPH_POINTS = 12
+
+/*
+  How often should we ping the server?
+  While developing, it's helpful to ping more frequently.
+  For 'production', this will be 10 seconds.
+*/
+const INTERVAL = 1250
+
+/*
+  Since the graph reads from right to left - right being the most recent -
+  the idea was to populate the graph with zeroed-out values.
+  `starterLoads` is a helper function that does just that.
+
+  The y-axis contains values which are simply all 0 to start with.
+  The x-axis contains time stamps, which this function helps to calculate.
+*/
+const starterLoads = length => {
+  let num = length - 1
+  const now = Date.now()
+
+  return [...Array(length)].map(() => ({
+    value: 0,
+    time: new Date(now - (1000 * num--)).toLocaleTimeString()
   }))
+}
+
+const initialState = {
+  interval: INTERVAL,
+  loads: starterLoads(GRAPH_POINTS)
 }
 
 const systemInfo = (state = initialState, action = {}) => {
   switch (action.type) {
     case 'LOAD_RECEIVED':
-      const freshLoad = { value: action.payload, time: new Date().toLocaleTimeString() }
-      let loads;
 
-      if (state.loads.length === 8) {
-        loads = state.loads.slice(1).concat(freshLoad)
-      } else {
-        loads = state.loads.concat(freshLoad)
+      // Keep only the latest N loads in the store.
+      return {
+        ...state,
+        loads: state.loads.slice(1).concat({
+          value: action.payload,
+          time: new Date().toLocaleTimeString()
+        })
       }
-
-      return { ...state, loads }
     default:
       return state
   }
