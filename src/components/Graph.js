@@ -32,6 +32,6 @@ const Graph = ({ className, loads, date }) => {
 }
 
 
-const mapStateToProps = ({ systemInfo }) => ({ loads: systemInfo.loads, date: Date.now() })
+const mapStateToProps = ({ systemInfo }) => ({ loads: systemInfo.loads })
 
 export default connect(mapStateToProps)(Graph)
