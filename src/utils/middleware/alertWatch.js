@@ -24,11 +24,13 @@ const alertWatch = store => next => action => {
   */
   const avg = loads.slice(-12).reduce((acc, { value }) => (acc + value), 0) / 12
 
+  console.log('AVG:', avg.toFixed(2))
+
   // Alert or recover.
   if (inAlertStatus) {
     avg < threshold && store.dispatch(recover())
   } else if (avg > threshold) {
-    store.dispatch(alert())
+    store.dispatch(alert(avg.toFixed(2)))
   }
 }
 

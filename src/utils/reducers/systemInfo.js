@@ -12,7 +12,14 @@ const GRAPH_POINTS = 60
   While developing, it's helpful to ping more frequently.
   For 'production', this will be 10 seconds.
 */
-const INTERVAL = 1250
+const INTERVAL = 250
+
+/*
+  Whats the threshold?
+  For 'production', it's 1, but when developing,
+  it's nice to set this lower to test alerting.
+*/
+const THRESHOLD = .33
 
 /*
   Since the graph reads from right to left - right being the most recent -
@@ -28,14 +35,17 @@ const starterLoads = length => {
 
   return [...Array(length)].map(() => ({
     value: 0,
-    time: new Date(now - (1000 * num--)).toLocaleTimeString()
+    time: timeDate(now - (1000 * num--))
   }))
 }
 
+var timeDate = (time = Date.now()) => new Date(time).toLocaleTimeString()
+
 const initialState = {
-  interval: INTERVAL,
+  darkTheme: true,
   inAlertStatus: false,
-  threshold: .25,
+  interval: INTERVAL,
+  threshold: THRESHOLD,
   messages: [],
   loads: starterLoads(GRAPH_POINTS)
 }
@@ -49,20 +59,26 @@ const systemInfo = (state = initialState, action = {}) => {
         ...state,
         loads: state.loads.slice(1).concat({
           value: action.payload,
-          time: new Date().toLocaleTimeString()
+          time: timeDate()
         })
       }
     case 'ALERT':
       return {
         ...state,
         inAlertStatus: true,
-        messages: state.messages.concat({ date: Date.now(), type: 'alert' })
+        messages: [{
+          msg: `High load generated an alert. Load = ${action.payload}, triggered at ${timeDate()}`,
+          type: 'alert'
+        }].concat(state.messages)
       }
     case 'RECOVER':
       return {
         ...state,
         inAlertStatus: false,
-        messages: state.messages.concat({ date: Date.now(), type: 'recover' })
+        messages: [{
+          msg: `System recovered from a high load at ${timeDate()}`,
+          type: 'recover'
+        }].concat(state.messages)
       }
     default:
       return state

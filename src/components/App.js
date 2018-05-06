@@ -1,7 +1,8 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
-import { loadReceived } from 'utils/actions'
+import { loadReceived } from 'actions'
 import Graph from 'components/Graph'
+import Messages from 'components/Messages'
 
 
 class App extends Component {
@@ -50,16 +51,23 @@ class App extends Component {
       )
     }
 
+    const { inAlertStatus } = this.props
+    const baseClass = 'ba-1px h-25 pa3'
+    const cls = `${baseClass}${inAlertStatus ? ' red' : ''}`
+
     return (
       <div className='pa3 vw-100 vh-100 overflow-h df flex-col'>
         <Graph className='flex-grow-1 mb3 h-75' />
-        <div className='ba-1px h-25'>Bottom</div>
+        <Messages className={cls} />
       </div>
     )
   }
 }
 
-const mapStateToProps = ({ systemInfo }) => ({ interval: systemInfo.interval })
+const mapStateToProps = ({ systemInfo }) => ({
+  interval: systemInfo.interval,
+  inAlertStatus: systemInfo.inAlertStatus
+})
 const mapDispatchToProps = dispatch => ({
   loadReceived: num => dispatch(loadReceived(num))
 })
