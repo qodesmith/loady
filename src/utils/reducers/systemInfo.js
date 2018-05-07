@@ -1,25 +1,29 @@
 /*
-  How many points should the graph show?
-  Since we want to ping the server every 10 seconds,
-  and our warning potentially go via a 2 minute evaluation,
-  we need at least 12 points. BUT... we want 10 minutes
-  worth of data, so that's 60 loads.
-*/
-const GRAPH_POINTS = 60
-
-/*
   How often should we ping the server?
   While developing, it's helpful to ping more frequently.
   For 'production', this will be 10 seconds.
 */
-const INTERVAL = 250
+const INTERVAL = 10000
+
+/*
+  What time span do we want to average over?
+  For 'production' it's 2 minutes.
+*/
+const AVG_LENGTH = 120000
+
+/*
+  How many points should the graph show?
+  Take however often we're pinging the server (INTERVAL),
+  and divide it by the the length of time we want to average over.
+*/
+const GRAPH_POINTS = AVG_LENGTH / INTERVAL
 
 /*
   Whats the threshold?
   For 'production', it's 1, but when developing,
   it's nice to set this lower to test alerting.
 */
-const THRESHOLD = .33
+const THRESHOLD = 1
 
 /*
   Since the graph reads from right to left - right being the most recent -

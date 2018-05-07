@@ -23,7 +23,7 @@ const Graph = ({ className, loads, date }) => {
       <ResponsiveContainer>
         <LineChart data={loads}>
           <XAxis dataKey='time' />
-          <YAxis domain={[0, 0.5]} width={25} />
+          <YAxis domain={[0, 1]} width={35} />
           <CartesianGrid strokeDasharray='3 3' stroke='#363636' />
           <Tooltip />
           {/*<Legend />*/}

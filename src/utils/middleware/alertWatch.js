@@ -20,7 +20,6 @@ const alertWatch = store => next => action => {
 
   // Get the average of the past 2 minutes worth of loads.
   const avg = calculateAverage(loads, interval, .2)
-  console.log('AVG:', avg)
 
   // Alert or recover.
   if (inAlertStatus) {
