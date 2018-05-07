@@ -27,6 +27,7 @@
     "cross-env": "^5",
     "css-loader": "^0",
     "css-mqpacker": "^6",
+    "cypress": "^2.1.0",
     "dotenv": "latest",
     "glob-all": "latest",
     "html-webpack-plugin": "^3",
