@@ -19,7 +19,7 @@ const INTERVAL = 250
   For 'production', it's 1, but when developing,
   it's nice to set this lower to test alerting.
 */
-const THRESHOLD = .31
+const THRESHOLD = .33
 
 /*
   Since the graph reads from right to left - right being the most recent -
@@ -42,7 +42,7 @@ const starterLoads = length => {
 var timeDate = (time = Date.now()) => new Date(time).toLocaleTimeString()
 
 const initialState = {
-  theme: 'light',
+  theme: 'dark',
   inAlertStatus: false,
   interval: INTERVAL,
   threshold: THRESHOLD,

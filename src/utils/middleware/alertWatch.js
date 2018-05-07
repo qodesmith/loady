@@ -16,22 +16,25 @@ const alertWatch = store => next => action => {
   // We'll trigger calculating alerts each time the server is pinged.
   if (action.type !== 'LOAD_RECEIVED') return
 
-  const { loads, inAlertStatus, threshold } = store.getState().systemInfo
+  const { loads, inAlertStatus, threshold, interval } = store.getState().systemInfo
 
-  /*
-    Get the average of the past 2 minutes worth of loads.
-    10 second pings, 6 pings a minute, 12 pings in 2 minutes.
-  */
-  const avg = loads.slice(-12).reduce((acc, { value }) => (acc + value), 0) / 12
-
-  console.log('AVG:', avg.toFixed(2))
+  // Get the average of the past 2 minutes worth of loads.
+  const avg = calculateAverage(loads, interval, .2)
+  console.log('AVG:', avg)
 
   // Alert or recover.
   if (inAlertStatus) {
     avg < threshold && store.dispatch(recover())
   } else if (avg > threshold) {
-    store.dispatch(alert(avg.toFixed(2)))
+    store.dispatch(alert(avg))
   }
+}
+
+export const calculateAverage = (loads = [], interval = 10000, minutes = 2) => {
+  const pings = Math.round((minutes * 60000) / interval) // How many pings in 2 minutes
+  const avg = loads.slice(-pings).reduce((acc, { value }) => (acc + value), 0) / pings
+
+  return +avg.toFixed(2)
 }
 
 export default alertWatch
