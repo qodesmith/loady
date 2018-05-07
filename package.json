@@ -56,6 +56,7 @@
     "local": "npm run server:api",
     "server:dev": "webpack-dev-server --mode development --env.dev --open --progress",
     "server:api": "nodemon server.js",
-    "start": "cross-env NODE_ENV=development npm-run-all --parallel server:*"
+    "start": "cross-env NODE_ENV=development npm-run-all --parallel server:*",
+    "test": "cypress run"
   }
 }

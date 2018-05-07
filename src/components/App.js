@@ -54,12 +54,12 @@ class App extends Component {
     }
 
     const { inAlertStatus } = this.props
-    const baseClass = 'ba-1px h-25 pa3 mono overflow-y-s'
+    const baseClass = 'ba-1px pa3 h-50 df flex-col'
     const cls = `${baseClass}${inAlertStatus ? ' red' : ''}`
 
     return (
       <div className='pa3 vw-100 vh-100 overflow-h df flex-col'>
-        <Graph className='flex-grow-1 mb3 h-75' />
+        <Graph className='mb3 h-50' />
         <Messages className={cls} />
       </div>
     )
