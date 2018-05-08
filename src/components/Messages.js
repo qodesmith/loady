@@ -7,6 +7,7 @@ const Messages = ({ className, messages, theme }) => (
   <div className={className}>
     <h3 className='ma0 mb2'>Messages:</h3>
     <div className={`mono overflow-y-s h-100 ${messages.length ? '' : centered}`}>
+      {/* List of messages. */}
       { !!messages.length &&
         messages.map(({ type, msg }, i) => {
           const color = theme === 'light' ? 'black-85' : 'turquoise'
@@ -18,6 +19,8 @@ const Messages = ({ className, messages, theme }) => (
           )
         })
       }
+
+      {/* No messages? Center a nice fancy message saying so. */}
       {
         !messages.length &&
         <div className='gray i'>No messages yet.</div>

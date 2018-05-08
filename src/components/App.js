@@ -59,7 +59,7 @@ class App extends Component {
 
     return (
       <div className='pa3 vw-100 vh-100 overflow-h df flex-col'>
-        <Graph className='mb3 h-50' />
+        <Graph className='mb3 h-50 relative' />
         <Messages className={cls} />
       </div>
     )

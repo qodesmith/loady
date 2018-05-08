@@ -18,6 +18,9 @@ import {
 const Graph = ({ className, loads, date }) => {
   return (
     <div className={className}>
+      <div className='absolute w-100 h-100 df align-items-center justify-center'>
+        <div className='i b darkslategray f-7rem f-3rem-m'>CPU LOAD</div>
+      </div>
 
       {/* Defaults to 100% width & height. */}
       <ResponsiveContainer>
