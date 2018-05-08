@@ -37,4 +37,4 @@ Because it's fun. Because I can. Because JavaScript, dammit.
 3. Light'em if you got'em
 
 
-This project was created with [Create New App](https://github.com/qodesmith/create-new-app). V2 branch, but that's still a WIP. I know, I know. It'll be up on NPM soon. I'm busy here people!
+This project was created with [Create New App](https://github.com/qodesmith/create-new-app). [V2](https://github.com/qodesmith/create-new-app/tree/v2) branch, but that's still a WIP. I know, I know. It'll be up on NPM soon. I'm busy here people!
