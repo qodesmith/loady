@@ -27,7 +27,7 @@ Because it's fun. Because I can. Because JavaScript, dammit.
 - [X] Whenever the load exceeds 1 for the past 2 minutes on avg., it's alert message time.
 - [X] Whenever the load drops below 1 (after an alert) on a 2 minute avg., it's recovered message time.
 - [X] Keep a running list of messages visible.
-- [ ] Write a test for the alerting logic.
+- [X] Write a test for the alerting logic.
 
 
 ## Try It Out

@@ -2,17 +2,7 @@ import { calculateAverage } from '../../src/utils/helpers'
 
 const makeArr = (num, val) => [...Array(num)].map(() => ({ value: val }))
 
-// { value: 0.24, time: '6:49:28 PM' }
-
-/*
-export const calculateAverage = (loads = [], interval = 10000, minutes = 2) => {
-  const pings = Math.round((minutes * 60000) / interval) // How many pings in N minutes.
-  const avg = loads.slice(-pings).reduce((acc, { value }) => (acc + value), 0) / pings
-
-  return +avg.toFixed(2)
-}
-*/
-
+// Array of objects => { value: 0.24, time: '6:49:28 PM' }
 
 describe('Calculating Average Load', () => {
   it('should correctly average an array of loads', () => {
@@ -47,7 +37,13 @@ describe('Calculating Average Load', () => {
     expect(calculateAverage(arr1.slice(12), 5000)).to.eq(1.5)
   })
 
-  it('should adjust according to how many minutes we specify', () => {
+  it('should only check the last 6 loads when specifying 1 minute', () => {
+    const arr1 = makeArr(6, 3)
+    const arr2 = arr1.concat(makeArr(6, .75))
 
+    expect(calculateAverage(arr1, undefined, 1)).to.eq(3)
+    expect(calculateAverage(arr1.concat(arr1), undefined, 1)).to.eq(3)
+    expect(calculateAverage(arr1.slice(2), undefined, 1)).to.be.lt(3)
+    expect(calculateAverage(arr2, undefined, 1)).to.eq(.75)
   })
 })
