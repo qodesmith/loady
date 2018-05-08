@@ -8,6 +8,7 @@
 */
 
 import { alert, recover } from 'actions'
+import { calculateAverage } from 'helpers'
 
 
 const alertWatch = store => next => action => {
@@ -27,13 +28,6 @@ const alertWatch = store => next => action => {
   } else if (avg > threshold) {
     store.dispatch(alert(avg))
   }
-}
-
-export const calculateAverage = (loads = [], interval = 10000, minutes = 2) => {
-  const pings = Math.round((minutes * 60000) / interval) // How many pings in 2 minutes
-  const avg = loads.slice(-pings).reduce((acc, { value }) => (acc + value), 0) / pings
-
-  return +avg.toFixed(2)
 }
 
 export default alertWatch

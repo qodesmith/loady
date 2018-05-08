@@ -1,12 +1,6 @@
-export const randomNum = (min, max) => Math.floor(Math.random() * (max - min + 1) + min)
+export const calculateAverage = (loads = [], interval = 10000, minutes = 2) => {
+  const pings = Math.round((minutes * 60000) / interval) // How many pings in N minutes.
+  const avg = loads.slice(-pings).reduce((acc, { value }) => (acc + value), 0) / pings
 
-const letters = 'abcdef'
-const numbers = '0123456789'
-export const randomHexColor = (hex = '') => {
-  if (hex.length === 6) return `#${hex}`
-
-  const set = randomNum(0,1) ? letters : numbers
-  const num = randomNum(0, set.length - 1)
-
-  return randomHexColor(`${hex}${set[num]}`)
+  return +avg.toFixed(2)
 }
