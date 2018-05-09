@@ -38,7 +38,7 @@ class Menu extends Component {
             className={`${themeClass} menu-title dit absolute right-0 bottom-0 pv2 w-50 tc`}
             onClick={toggleMenu}
           >
-            {menuOpen ? 'CLOSE' : 'THEME'}
+            {menuOpen ? 'CLOSE' : 'MENU'}
           </div>
         </div>
       </div>
