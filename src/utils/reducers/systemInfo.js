@@ -84,6 +84,8 @@ const systemInfo = (state = initialState, action = {}) => {
           type: 'recover'
         }].concat(state.messages)
       }
+    case 'CHANGE_THEME':
+      return { ...state, theme: action.payload }
     default:
       return state
   }

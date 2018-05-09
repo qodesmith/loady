@@ -15,11 +15,12 @@ import {
 // http://recharts.org
 // { value: 0.24, time: '6:49:28 PM' }
 
-const Graph = ({ className, loads, date }) => {
+const Graph = ({ className, loads, date, theme }) => {
+  const color = theme === 'dark' ? 'darkslategray' : 'gainsboro'
   return (
     <div className={className}>
       <div className='absolute w-100 h-100 df align-items-center justify-center'>
-        <div className='i b darkslategray f-7rem f-3rem-m'>CPU LOAD</div>
+        <div className={`${color} i b f-7rem f-3rem-m`}>CPU LOAD</div>
       </div>
 
       {/* Defaults to 100% width & height. */}
@@ -45,6 +46,9 @@ const Graph = ({ className, loads, date }) => {
 }
 
 
-const mapStateToProps = ({ systemInfo }) => ({ loads: systemInfo.loads })
+const mapStateToProps = ({ systemInfo }) => ({
+  loads: systemInfo.loads,
+  theme: systemInfo.theme
+})
 
 export default connect(mapStateToProps)(Graph)

@@ -3,31 +3,27 @@ import { connect } from 'react-redux'
 import { loadReceived } from 'actions'
 import Graph from 'components/Graph'
 import Messages from 'components/Messages'
+import Menu from 'components/Menu'
 
 
 class App extends Component {
   constructor(props) {
     super(props)
     this.state = { error: null }
-  }
-
-  componentWillMount() {
-    const themes = {
+    this.themes = {
       dark: 'fw1 bg-black-85 turquoise',
       light: 'fw1 black-85'
     }
-
-    document.body.className = themes[this.props.theme]
   }
 
   componentDidMount() {
-    const { interval, loadReceived } = this.props
+    const { interval, received } = this.props
 
     // Fetch the CPU load periodically.
     this.interval = setInterval(() => {
       fetch('/load')
         .then(res => res.json())
-        .then(({ load }) => loadReceived(load))
+        .then(({ load }) => received(load))
     }, interval)
   }
 
@@ -56,9 +52,11 @@ class App extends Component {
     const { inAlertStatus } = this.props
     const baseClass = 'ba-1px pa3 h-50 df flex-col'
     const cls = `${baseClass}${inAlertStatus ? ' red' : ''}`
+    const themeClass = this.themes[this.props.theme]
 
     return (
-      <div className='pa3 vw-100 vh-100 overflow-h df flex-col'>
+      <div className={`pa3 vw-100 vh-100 overflow-h df flex-col ${themeClass}`}>
+        <Menu />
         <Graph className='mb3 h-50 relative' />
         <Messages className={cls} />
       </div>
@@ -72,7 +70,7 @@ const mapStateToProps = ({ systemInfo }) => ({
   theme: systemInfo.theme
 })
 const mapDispatchToProps = dispatch => ({
-  loadReceived: num => dispatch(loadReceived(num))
+  received: num => dispatch(loadReceived(num))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)
