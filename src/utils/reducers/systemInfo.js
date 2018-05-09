@@ -86,6 +86,8 @@ const systemInfo = (state = initialState, action = {}) => {
       }
     case 'CHANGE_THEME':
       return { ...state, theme: action.payload }
+    case 'CHANGE_INTERVAL':
+      return { ...state, interval: action.payload }
     default:
       return state
   }

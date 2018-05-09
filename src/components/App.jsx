@@ -17,14 +17,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const { interval, received } = this.props
-
-    // Fetch the CPU load periodically.
-    this.interval = setInterval(() => {
-      fetch('/load')
-        .then(res => res.json())
-        .then(({ load }) => received(load))
-    }, interval)
+    this.setInterval(this.props.interval)
   }
 
   // React error handling!
@@ -32,6 +25,24 @@ class App extends Component {
     clearInterval(this.interval)
     this.setState({ error })
     console.log(error)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.interval) {
+      this.setInterval(nextProps.interval)
+    }
+  }
+
+  // Fetch the CPU load periodically.
+  setInterval(interval, received) {
+    clearInterval(this.interval)
+
+    this.interval = setInterval(() => {
+      console.log(interval)
+      fetch('/load')
+        .then(res => res.json())
+        .then(({ load }) => this.props.received(load))
+    }, interval)
   }
 
   render() {
