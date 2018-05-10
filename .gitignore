@@ -1,6 +1,11 @@
 # This files contents were taken from Github's Node example:
 # https://github.com/github/gitignore/blob/master/Node.gitignore
 
+# Custom additions not included in the original file
+dist/*
+!dist/favicon.ico
+!dist/robots.txt
+
 # Logs
 logs
 *.log
